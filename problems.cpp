@@ -15,7 +15,7 @@ void problem1(int N) {
     mul15 = N / 15;
     sum = ((3 * mul3 * mul3 + 3 * mul3) >> 1) + ((5 * mul5 * mul5 + 5 * mul5) >> 1);
     sum -= (15 * mul15 * mul15 + 15 * mul15) >> 1;
-    cout << N + 1 << ": " << sum << endl;
+    cout << "Sum of multiples of 3 or 5 < " << N + 1 << ": " << sum << endl;
 }
 
 void test_problem1() {
@@ -25,10 +25,38 @@ void test_problem1() {
     problem1(9);
     problem1(14);
     problem1(1000000000);
-
 }
+
+/** print the sum of all even fibonacci numbers less than N
+ *  @param N unsigned long long int
+ *  @pre @param 10 <= N <= 4 * 10^16
+ */
+void problem2(unsigned long long int N) {
+    unsigned long long int sum, f1, f2, tmp;    
+    f1 = 1; f2 = 2; sum = 0;
+
+    // even fibonaccis appear with a period of 3
+    while (f2 <= N) {   
+        sum += f2;
+        f1 += f2;
+        f2 += f1;
+        f1 += f2;
+        tmp = f1;
+        f1 = f2;
+        f2 = tmp;    
+    }   
+   
+    cout << "Sum of even fibonacci numbers <= " << N << ": " << sum << endl;
+}
+
+void test_problem2() {
+    problem2(10);
+    problem2(4000000000000);
+}
+
 int main() {
-    /* Enter your code here. Read input from STDIN. Print output to STDOUT */ 
     test_problem1();
+    test_problem2();
+   
     return 0;
 }
